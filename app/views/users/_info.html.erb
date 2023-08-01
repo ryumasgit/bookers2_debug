@@ -1,0 +1,38 @@
+<table class='table'>
+  <tr><%= image_tag user.get_profile_image(100,100) %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= user.name %></th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+    <th>Follows</th>
+    <th><%= link_to user_follows_path(user) do %>
+          <h6><%= user.follower.count %></h6>
+        <% end %>
+    </th>
+  </tr>
+  <tr>
+    <th>Followers</th>
+    <th><%= link_to  user_followers_path(user) do %>
+          <h6><%= user.followed.count %></h6>
+        <% end %>
+    </th>
+  </tr>
+</table>
+
+<div class='row'>
+    <% if user == current_user %>
+      <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+    <% else %>
+      <td><%= render 'relationships/btn', user: user %></td>
+    <% end %>
+    <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+      <%= link_to 'chatを始める', message_path(user.id), class: "ml-3" %>
+    <% end %>
+</div>

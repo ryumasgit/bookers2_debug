@@ -1,0 +1,67 @@
+<h4>７日間分の投稿数</h4>
+<table class='table table-bordered'>
+    <tr>
+      <th>６日前</th>
+      <th>５日前</th>
+      <th>４日前</th>
+      <th>３日前</th>
+      <th>２日前</th>
+      <th>１日前</th>
+      <th>今日</th>
+    </tr>
+    <tr>
+      <td><%= @books.created_6days_ago.count %></td>
+      <td><%= @books.created_5days_ago.count %></td>
+      <td><%= @books.created_4days_ago.count %></td>
+      <td><%= @books.created_3days_ago.count %></td>
+      <td><%= @books.created_2days_ago.count %></td>
+      <td><%= @yesterday_book.count %></td>
+      <td><%= @today_book.count %></td>
+    </tr>
+  </table>
+  <p class="text-center text-muted font-weight-bold mb-0">７日間の投稿数の比較</p>
+  <canvas id="myLineChart"></canvas>
+  <script>
+    $(document).on('turbolinks:load', function(){
+      var ctx = document.getElementById("myLineChart");
+      var myLineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["６日前", "５日前", "４日前", "３日前", "２日前", "１日前", "今日"],
+          datasets: [
+            {
+              label: "投稿した本の数",
+              data: [
+                <%= @books.created_6days_ago.count %>,
+                <%= @books.created_5days_ago.count %>,
+                <%= @books.created_4days_ago.count %>,
+                <%= @books.created_3days_ago.count %>,
+                <%= @books.created_2days_ago.count %>,
+                <%= @yesterday_book.count %>,
+                <%= @today_book.count %>
+              ],
+              borderColor: "rgba(0,0,255,1)",
+              backgroundColor: "rgba(0,0,0,0)",
+              tension: 0.4
+            }
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: '７日間の投稿数の比較'
+          },
+          responsive: true,
+          scales: {
+            y:{
+              suggestedMin: 0,
+              suggestedMax: 10
+            },
+            x:{
+              stacked: true
+            },
+          },
+        }
+      });
+    });
+  </script>

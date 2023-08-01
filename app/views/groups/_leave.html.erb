@@ -1,0 +1,9 @@
+<%= form_with url: group_leave_path(group), method: :delete, local:true do |f| %>
+  <div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :group_id, value: group.id %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Leave this group", class: 'btn btn-sm btn-danger' %>
+  </div>
+<% end %>
