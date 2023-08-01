@@ -8,24 +8,18 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @group_users = @group.group_users
-    user_ids = @group_users.pluck(:user_id)
-    @users = User.where(id: user_ids)
     @book = Book.new
   end
 
   def index
     @book = Book.new
     @groups = Group.all
-    @group_users = GroupUser.all
   end
 
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save
-      @group_user = GroupUser.new(user_id: current_user.id, group_id: @group.id)
-      @group_user.save
       redirect_to groups_path, notice: "You have created group successfully."
     else
       render 'new'
@@ -43,18 +37,16 @@ class GroupsController < ApplicationController
     end
   end
 
-  def join
-    @group_user = GroupUser.new(user_id: params[:user_id], group_id: params[:group_id])
-    if @group_user.save
-      redirect_to groups_path, notice: "You have joined group successfully."
-    end
+  def new_mail
+    @group = Group.find(params[:group_id])
   end
 
-  def leave
-    @group_user = GroupUser.find_by(user_id: params[:user_id], group_id: params[:group_id])
-    if @group_user.destroy
-      redirect_to groups_path, notice: "You have leaved group successfully."
-    end
+  def send_mail
+    @group = Group.find(params[:group_id])
+    group_users = @group.users
+    @mail_title = params[:mail_title]
+    @mail_content = params[:mail_content]
+    ContactMailer.send_mail(@mail_title, @mail_content,group_users).deliver
   end
 
   private

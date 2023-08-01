@@ -14,11 +14,13 @@ Rails.application.routes.draw do
   get 'followers' => 'relationships#followers', as: 'followers'
   end
 
-  resources :messages, only: [:create, :show]
   resources :groups, only: [:new, :show, :index, :edit, :create, :update] do
-    get "join" => "groups#join"
-    delete '/groups/:group_id/leave', to: 'groups#leave', as: 'leave'
+    resource :group_users, only: [:create, :destroy]
+    get "new/mail" => "groups#new_mail"
+    get "send/mail" => "groups#send_mail"
   end
+
+  resources :messages, only: [:create, :show]
   resources :view_counts, only: [:create]
 
   get "/home/about", to: "homes#about", as: "about"

@@ -39,5 +39,6 @@
 yarn-debug.log*
 .yarn-integrity
 
-/app/mailer/
+/app/mailers/
 /config/environments/
+/config/initializers
