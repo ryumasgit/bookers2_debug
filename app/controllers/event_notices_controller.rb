@@ -5,10 +5,24 @@ class EventNoticesController < ApplicationController
   end
 
   def create
+
     @group = Group.find(params[:group_id])
-    group_users = @group.users
     @title = params[:title]
     @body = params[:body]
-    EventMailer.send_mail(@title, @body,group_users).deliver
+
+    event = {
+      :group => @group,
+      :title => @title,
+      :body => @body
+    }
+
+    EventMailer.send_notifications_to_group(event)
+
+    render :sent
   end
+
+  def sent
+    redirect_to group_path(params[:group_id])
+  end
+
 end
