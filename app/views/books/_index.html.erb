@@ -1,9 +1,10 @@
-<table class='table table-hover table-inverse'>
+<table class='table table-hover table-inverse text-nowrap'>
   <thead>
     <tr>
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -28,6 +29,7 @@
           </span>
         </td>
         <td>閲覧数: <%= book.view_counts.count %></td>
+        <td><%= render 'books/static_rate', book: book %></td>
         <td></td>
       </tr>
     <% end %>

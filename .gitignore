@@ -41,4 +41,4 @@ yarn-debug.log*
 
 /app/mailers/
 /config/environments/
-/config/initializers
+/config/initializers/
