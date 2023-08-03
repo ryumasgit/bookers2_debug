@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "homes#top"
-  get "/home/about", to: "homes#about", as: "about"
+  root to: 'homes#top'
+  get '/home/about' => 'homes#about', as: 'about'
   get 'search' => 'searches#search'
+  get 'sort' => 'books#sort'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create, :destroy]
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index,:show,:edit,:update] do
-    get "search" => "users#search"
+    get 'search' => 'users#search'
     resource :relationships, only: [:create, :destroy]
   get 'follows' => 'relationships#follows', as: 'follows'
   get 'followers' => 'relationships#followers', as: 'followers'
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:new, :show, :index, :edit, :create, :update] do
     resource :group_users, only: [:create, :destroy]
     resources :event_notices, only: [:new, :create]
-    get "event_notices" => "event_notices#sent"
+    get'"event_notices' => 'event_notices#sent'
   end
 
   resources :messages, only: [:create, :show]

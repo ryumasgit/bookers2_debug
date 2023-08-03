@@ -19,7 +19,7 @@
       <div id="post_raty"></div>
     </div>
     <script>
-      $(document).on('turbolinks:load', function(){
+      $(document).on('turbolinks:load', function() {
         let elem = document.querySelector('#post_raty');
         if (elem == null) return;
 
@@ -29,11 +29,15 @@
           starOn: "<%= asset_path('star-on.png') %>",
           starOff: "<%= asset_path('star-off.png') %>",
           starHalf: "<%= asset_path('star-half.png') %>",
-          scoreName: 'book[star]'
+          scoreName: 'book[rate]'
         };
         raty(elem,opt);
       });
     </script>
+  <% else %>
+    <div class="form-group">
+      <%= render 'static_rate', book: book %>
+    </div>
   <% end %>
 
   <div class="form-group">
