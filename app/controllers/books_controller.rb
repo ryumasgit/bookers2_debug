@@ -11,33 +11,20 @@ class BooksController < ApplicationController
     end
   end
 
-  def sort
-    method = params[:method]
-    case method
-    when "create"
-      @books = Book.all.order(created_at: :desc)
-    when "rate"
-      @books = Book.all.order(rate: :desc)
-    when "favorite"
+  def index
+    if params[:sort] == "favorite size"
       @books = Book.includes(:favorited_books).sort_by {|x|
         x.favorited_books.includes(:favorites).size
       }.reverse
+    else
+      @books = Book.all.order(params[:sort])
     end
     @book = Book.new
-    render 'index'
-  end
-
-  def index
-    #1週間のいいね順有効時
     # to = Time.current.at_end_of_day
     # from = (to - 6.day).at_beginning_of_day
     # @books = Book.includes(:favorited_books).sort_by {|x|
     #     x.favorited_books.includes(:favorites).where(created_at: from...to).size
     #   }.reverse
-
-    #1週間のいいね順無効時
-    @books = Book.all
-    @book = Book.new
   end
 
   def create
