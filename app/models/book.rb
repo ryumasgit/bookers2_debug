@@ -7,6 +7,7 @@ class Book < ApplicationRecord
 
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  validates :tag,presence:true
 
   scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
   scope :created_yesterday, -> { where(created_at: 1.day.ago.all_day) }
@@ -30,6 +31,10 @@ class Book < ApplicationRecord
     else
       Book.all
     end
+  end
+
+  def self.search_tag_for(content)
+    Book.where("tag LIKE?", "#{content}")
   end
 
   def favorited_by?(user)
