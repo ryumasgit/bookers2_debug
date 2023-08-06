@@ -12,12 +12,14 @@ class BooksController < ApplicationController
   end
 
   def index
-    if params[:sort] == "favorite size"
+    if params[:sort] == "favorite DESC"
       @books = Book.includes(:favorited_books).sort_by {|x|
         x.favorited_books.includes(:favorites).size
       }.reverse
-    else
+    elsif (params[:sort]) == "created_at DESC" || (params[:sort]) == "rate DESC"
       @books = Book.all.order(params[:sort])
+    else
+      @books = Book.all
     end
     @book = Book.new
     # to = Time.current.at_end_of_day

@@ -13,7 +13,7 @@
       |
       <%= link_to '評価が高い順', books_path(sort: "rate DESC") %>
       |
-      <%= link_to 'いいねが多い順', books_path(sort: "favorite size") %>
+      <%= link_to 'いいねが多い順', books_path(sort: "favorite DESC") %>
       <%= render 'index', books: @books%>
     </div>
   </div>
