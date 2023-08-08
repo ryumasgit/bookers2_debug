@@ -11,7 +11,9 @@ Things you may want to cover:
 * Rails version
 6.1.7.4
 
-* [Bookers2] is a website with user functionality where you can post your thoughts on books you've read.
+* Node.js, Yarn, ImageMagick, SQLite
+
+_[Bookers2] is a website with user functionality where you can post your thoughts on books you've read._
 
 [Bookers2] utilizes devise for creating user authentication functionality.
 For new registrations, entering a username, email address, and password is required.
