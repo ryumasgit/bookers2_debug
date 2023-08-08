@@ -11,7 +11,8 @@ Things you may want to cover:
 * Rails version
 6.1.7.4
 
-* Node.js, Yarn, ImageMagick, SQLite
+* System dependencies
+Node.js, Yarn, ImageMagick, SQLite
 
 _[Bookers2] is a website with user functionality where you can post your thoughts on books you've read._
 
