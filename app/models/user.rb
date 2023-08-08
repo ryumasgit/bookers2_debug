@@ -33,7 +33,7 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
-  def self.search_for(method, content)
+  def self.search_for(content, method)
     if method == "perfect"
       User.where("name LIKE?", "#{content}")
     elsif method == "forward"
