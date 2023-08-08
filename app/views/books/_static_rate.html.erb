@@ -1,10 +1,10 @@
 <div id="rate_<%= book.id %>"></div>
 <script>
-  document.addEventListener('turbolinks:load', function() {
-  let elem = document.querySelector(`#rate_<%= book.id %>`);
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#rate_<%= book.id %>');
   if (elem == null) return;
 
-  elem.innerHTML = ""
+  elem.innerHTML = "";
   let opt = {
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",

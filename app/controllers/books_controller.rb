@@ -17,7 +17,7 @@ class BooksController < ApplicationController
         x.favorited_books.includes(:favorites).size
       }.reverse
     else (params[:sort]) == "created_at DESC" || (params[:sort]) == "rate DESC"
-      @books = Book.all.order(params[:sort])
+         @books = Book.all.order(params[:sort])
     end
     @book = Book.new
     # to = Time.current.at_end_of_day
